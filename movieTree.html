@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+   </head>
+   <body style="height: 100%; margin: 0">
+	   <div id="container-0" style=" height: 300%;margin-bottom:100px;"></div>
+	   <div id="container-1" style=" height: 300%; margin-bottom:100px;"></div>
+	   <div id="container-2" style=" height: 300%;margin-bottom:100px;"></div>
+	   <div id="container-3" style=" height: 300%; margin-bottom:100px;"></div>
+	   <div id="container-4" style=" height: 300%;margin-bottom:100px;"></div>
+	   <div id="container-5" style=" height: 300%; margin-bottom:100px;"></div>
+	   <div id="container-6" style=" height: 300%;margin-bottom:100px;"></div>
+	   <div id="container-7" style=" height: 300%; margin-bottom:100px;"></div>
+	   <div id="container-8" style=" height: 300%;margin-bottom:100px;"></div>
+	   <div id="container-9" style=" height: 300%; margin-bottom:100px;"></div>
+	   <div id="container-10" style=" height: 300%;margin-bottom:100px;"></div>
+	   <div id="container-11" style=" height: 300%; margin-bottom:100px;"></div>
+	   <div id="container-12" style=" height: 300%;margin-bottom:100px;"></div>
+	   <div id="container-13" style=" height: 300%; margin-bottom:100px;"></div>
+	   <div id="container-14" style=" height: 300%;margin-bottom:100px;"></div>
+	   <div id="container-15" style=" height: 200%; margin-bottom:100px;"></div>
+	   <div id="container-16" style=" height: 300%;margin-bottom:100px;"></div>
+	   <div id="container-17" style=" height: 300%; margin-bottom:100px;"></div>
+	   <div id="container-18" style=" height: 300%;margin-bottom:100px;"></div>
+	   <div id="container-19" style=" height: 300%;margin-bottom:100px;"></div>
+	   <div id="container-20" style=" height: 300%;margin-bottom:100px;"></div>
+
+	   <!-- <div id="container1" style="height: 100%"></div> -->
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+       <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+	   <script type="text/javascript" src="C:\Users\Administrator\Desktop\books\jquery.min.js"></script>
+       <script type="text/javascript">
+
+var myChart;
+var dataEnd = {};
+//   http://echarts.baidu.com/examples/data/asset/data/flare.json ../Desktop/books/movieTreeJson.txt
+
+
+
+
+
+$.ajaxSettings.async = false;
+$.get('../Desktop/books/movieTreeJson.txt', function (data) {
+	
+	var subStr = data.substring(1,data.length-1).replace(/\\"/g, "\"");
+	
+	//alert(subStr);
+	dataEnd = JSON.parse(subStr);
+	//alert(dataEnd)
+});
+
+
+for(var i=0; i<21; i++) {
+	initEcharts("container-"+i, i);
+}
+
+
+function initEcharts(name, index) {
+	
+	myChart = echarts.init(document.getElementById(name));
+	option = null;
+	myChart.showLoading();
+
+
+	myChart.hideLoading();
+	
+
+	myChart.setOption(option = {
+		tooltip: {
+			trigger: 'item',
+			triggerOn: 'mousemove'
+		},
+		series: [
+			{
+				type: 'tree',
+
+				data: [dataEnd.types[i]],
+
+				top: '18%',
+				bottom: '14%',
+
+				layout: 'radial',
+
+				symbol: 'emptyCircle',
+
+				symbolSize: 7,
+
+				initialTreeDepth: 3,
+
+				animationDurationUpdate: 750
+
+			}
+		]
+	});
+	if (option && typeof option === "object") {
+		myChart.setOption(option, true);
+	}
+
+}
+       </script>
+   </body>
+</html>
